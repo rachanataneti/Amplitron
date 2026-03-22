@@ -122,7 +122,13 @@ std::string PresetManager::to_json(const PresetData& preset) {
     // Timestamp
     std::time_t now = std::time(nullptr);
     char timebuf[64];
-    std::strftime(timebuf, sizeof(timebuf), "%Y-%m-%dT%H:%M:%S", std::localtime(&now));
+    std::tm time_info;
+#ifdef _WIN32
+    localtime_s(&time_info, &now);
+#else
+    localtime_r(&now, &time_info);
+#endif
+    std::strftime(timebuf, sizeof(timebuf), "%Y-%m-%dT%H:%M:%S", &time_info);
     ss << "  \"saved_at\": \"" << timebuf << "\",\n";
 
     ss << "  \"input_gain\": " << preset.input_gain << ",\n";

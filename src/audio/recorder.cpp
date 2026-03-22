@@ -34,7 +34,13 @@ std::string Recorder::get_recordings_dir() {
 std::string Recorder::generate_filename() {
     std::time_t now = std::time(nullptr);
     char buf[64];
-    std::strftime(buf, sizeof(buf), "%Y%m%d_%H%M%S", std::localtime(&now));
+    std::tm time_info;
+#ifdef _WIN32
+    localtime_s(&time_info, &now);
+#else
+    localtime_r(&now, &time_info);
+#endif
+    std::strftime(buf, sizeof(buf), "%Y%m%d_%H%M%S", &time_info);
     return get_recordings_dir() + "/" + std::string(buf) + ".wav";
 }
 
@@ -259,7 +265,13 @@ void Recorder::write_metadata(const std::string& wav_path, AudioEngine& engine) 
 
     std::time_t now = std::time(nullptr);
     char timebuf[64];
-    std::strftime(timebuf, sizeof(timebuf), "%Y-%m-%dT%H:%M:%S", std::localtime(&now));
+    std::tm time_info;
+#ifdef _WIN32
+    localtime_s(&time_info, &now);
+#else
+    localtime_r(&now, &time_info);
+#endif
+    std::strftime(timebuf, sizeof(timebuf), "%Y-%m-%dT%H:%M:%S", &time_info);
 
     float duration = get_duration();
 
