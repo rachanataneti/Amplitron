@@ -8,6 +8,7 @@
 #include <memory>
 #include <utility>
 #include <vector>
+#include <cstring>
 
 namespace GuitarAmp {
 

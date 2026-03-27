@@ -6,6 +6,9 @@
 #include "gui/command_history.h"
 #include "gui/spectrum_analyzer.h"
 #include "audio/effects/tuner.h"
+#include <thread>
+#include <mutex>
+#include <string>
 
 struct SDL_Window;
 typedef void* SDL_GLContext;
@@ -152,6 +155,13 @@ private:
     bool show_recording_save_ = false;
     bool recording_save_pending_ = false;
     float rec_waveform_buf_[512] = {};
+
+    // Update checking
+    void check_for_updates();
+    std::mutex update_mutex_;
+    bool has_new_release_ = false;
+    std::string new_release_version_;
+    std::string new_release_url_;
 };
 
 } // namespace GuitarAmp
