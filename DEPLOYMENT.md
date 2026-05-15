@@ -58,6 +58,8 @@ https://amplitron.sudipmondal.co.in/pr-previews/pr-<number>/
 
 The preview deployment intentionally reuses the existing CI web build instead of compiling the Emscripten target a second time. Pull Request code is built with read-only CI permissions, while the deploy workflow only publishes the trusted CI artifact to GitHub Pages.
 
+Because GitHub only runs `workflow_run` workflows that already exist on the default branch, this preview workflow starts creating URLs after it is merged to `main`. The pull request that introduces the workflow cannot publish its own preview from the new workflow file.
+
 ## Creating a Release
 
 ### Step 1: Prepare the Release
