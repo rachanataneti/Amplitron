@@ -124,7 +124,14 @@ void PedalWidget::render_standard_pedal(ImDrawList* dl, ImVec2 p0, ImVec2 p1, fl
         }
 
 }
-
+// soectrum analyser buttom 
+ImGui::setCursorScreenpos(ImVec2(p0.x+pedal_width - 45, p0.y + 12));
+char spectrum _label[32];
+snprintf(spectrum _label,sizeof(spectrum _label), "S##spec%d",index_);
+if(ImGui::SamllButton(spectrum _label))
+{
+//Temporary UI button for analyser
+}
 
 
 
