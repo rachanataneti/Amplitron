@@ -125,8 +125,8 @@ void PedalWidget::render_standard_pedal(ImDrawList* dl, ImVec2 p0, ImVec2 p1, fl
 // spectrum analyser buttom 
 ImGui::SetCursorScreenPos(ImVec2(p0.x + pedal_width - 65 , p0.y + 12));
 char spectrum_label[32];
-snprintf(spectrum_label,sizeof(spectrum _label), "S##spec%d",index_);
-if(ImGui:: Smallbutton (spectrum _label))
+snprintf(spectrum_label,sizeof(spectrum_label), "S##spec%d",index_);
+if(ImGui::SmallButton (spectrum_label))
 {
 //Temporary UI button for analyser
 }
