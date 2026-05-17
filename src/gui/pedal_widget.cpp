@@ -122,17 +122,15 @@ void PedalWidget::render_standard_pedal(ImDrawList* dl, ImVec2 p0, ImVec2 p1, fl
                     40
                 ));
         }
-
-}
-// soectrum analyser buttom 
-ImGui::setCursorScreenpos(ImVec2(p0.x+pedal_width - 45, p0.y + 12));
-char spectrum _label[32];
-snprintf(spectrum _label,sizeof(spectrum _label), "S##spec%d",index_);
-if(ImGui::SamllButton(spectrum _label))
+// spectrum analyser buttom 
+ImGui::SetCursorScreenPos(ImVec2(p0.x + pedal_width - 65 , p0.y + 12));
+char spectrum_label[32];
+snprintf(spectrum_label,sizeof(spectrum _label), "S##spec%d",index_);
+if(ImGui:: Smallbutton (spectrum _label))
 {
 //Temporary UI button for analyser
 }
-
+}
 
 
 void PedalWidget::render_footswitch_and_extras(ImDrawList* dl, ImVec2 p0, ImVec2 p1, float pedal_width, float pedal_height, bool is_amp, bool enabled, bool& should_remove) {
