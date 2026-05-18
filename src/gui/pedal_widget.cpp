@@ -128,8 +128,13 @@ char spectrum_label[32];
 snprintf(spectrum_label,sizeof(spectrum_label), "S##spec%d",index_);
 if(ImGui::SmallButton (spectrum_label))
 {
-//Temporary UI button for analyser
+   show_spectrum_ = !show_spectrum_;
+    
 }
+    if(show_spectrum_){
+        ImGui::SetCursorScreenPos(ImVec2(p0.x + 10,p0.y +50));
+        ImGui::Text("spectrum active");
+    }
 }
 
 
