@@ -87,7 +87,7 @@ private:
 
     ImVec4 pedal_color_;  ///< Pedal body color derived from effect type.
     ImVec4 led_color_;    ///< LED / accent color derived from effect type.
-    bool show_spectrum_ = flase;
+    bool show_spectrum_ = false:
 
     /** @brief Look up pedal_color_ and led_color_ from the theme table. */
     void assign_colors();
