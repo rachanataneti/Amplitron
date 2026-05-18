@@ -132,8 +132,25 @@ if(ImGui::SmallButton (spectrum_label))
     
 }
     if(show_spectrum_){
-        ImGui::SetCursorScreenPos(ImVec2(p0.x + 10,p0.y +50));
-        ImGui::Text("spectrum active");
+            ImVec2 graph_start = ImVec2(p0.x + 10, p0.y +50);
+            ImVec2 graph_end = ImVec2(p0.x+ pedal_width - 10, p0.y + 90);
+        //Background 
+        dl->AddRectFilled(
+            graph_start,
+            graph_end,
+            IM_COL32(20,20,20,220),
+            4.0f
+            );
+        //Fake spectrum bars 
+        for(int i=0;i<8;i++){
+            float x= graph_start.x + (i*18.0f);
+            float height = 10.0f + (i%3)*8.0f;
+            dl->AddLine(
+                ImVec2(x,graph_end.y),
+                ImVec2(x,graph_end.y - height),
+                IM_COL32(0,225,0,225),
+                2.0f
+                );
     }
 }
 
