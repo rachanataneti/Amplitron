@@ -153,7 +153,7 @@ if(ImGui::SmallButton (spectrum_label))
                 );
     }
 }
-
+}
 
 void PedalWidget::render_footswitch_and_extras(ImDrawList* dl, ImVec2 p0, ImVec2 p1, float pedal_width, float pedal_height, bool is_amp, bool enabled, bool& should_remove) {
     // LED tooltip — hover area over the LED indicator
