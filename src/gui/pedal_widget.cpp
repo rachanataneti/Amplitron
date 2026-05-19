@@ -136,30 +136,40 @@ if(ImGui::SmallButton (spectrum_label))
    show_spectrum_ = !show_spectrum_;
     
 }
-    if(show_spectrum_){
-            ImVec2 graph_start = ImVec2(p0.x + 10, p0.y +50);
-            ImVec2 graph_end = ImVec2(p0.x+ pedal_width - 10, p0.y + 90);
-        //Background 
-        dl->AddRectFilled(
-            graph_start,
-            graph_end,
-            IM_COL32(20,20,20,220),
-            4.0f
-            );
-        //Fake spectrum bars 
-        for(int i=0;i<8;i++){
-            float x= graph_start.x + (i*18.0f);
-            float time = static_cast<float>(ImGui::GetTime());
-            float height = 20.0f + std::sin(time*4.0f+i)*15.0f;
-            dl->AddLine(
-                ImVec2(x,graph_end.y),
-                ImVec2(x,graph_end.y - height),
-                IM_COL32(0,225,0,225),
-                2.0f
-                );
-    }
-}
-}
+  if (show_spectrum_){
+      ImVec2 graph_pos = ImVec2(p0.x + 10, p0.y + 50);
+      ImVec2 graph_size = ImVec2(pedal_width - 20, 80);
+
+      static float dummy_input[spectrumAnalyzer::FFT_SIZE] = {};
+      static float dummy_output[ SpectrumAnalyzer::FFT_SIZE] = {};
+
+      float time = static_cast<float>(ImGui::GetTime());
+
+      for (int i = 0; i <SpectrumAnalyzer::FFT_SIZE; ++i) {
+          
+          float t = static_cast<float>(i) / spectrumAnalyzer::FFT_SIZE;
+
+          dummy_input[i] =
+              0.5f * std::sin(time * 2.0f + t * 40.0f);
+          dummy_output[i] =
+              0.5f * std::sin(time * 3.0f + t * 80.0f);
+      }
+
+      spectrum_analyzer_.update(
+          dummy_input,
+          dummy_output,
+          44100,
+          1.0f/ 60.0f
+      );
+
+      spectrum_analyzer_.draw(
+          dl,
+          graph_pos,
+          graph_size,
+          SpectrumAnalyzer::DisplayMode::Overlay
+      );
+  }
+      
 
 void PedalWidget::render_footswitch_and_extras(ImDrawList* dl, ImVec2 p0, ImVec2 p1, float pedal_width, float pedal_height, bool is_amp, bool enabled, bool& should_remove) {
     bool is_looper = !is_amp && (std::strcmp(effect_->name(), "Looper") == 0);
