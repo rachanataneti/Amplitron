@@ -144,7 +144,8 @@ if(ImGui::SmallButton (spectrum_label))
         //Fake spectrum bars 
         for(int i=0;i<8;i++){
             float x= graph_start.x + (i*18.0f);
-            float height = 10.0f + (i%3)*8.0f;
+            float time = static_cast<float>(ImGui::GetTime());
+            float height = 20.0f + std::sin(time*4.0f+i)*15.0f;
             dl->AddLine(
                 ImVec2(x,graph_end.y),
                 ImVec2(x,graph_end.y - height),
