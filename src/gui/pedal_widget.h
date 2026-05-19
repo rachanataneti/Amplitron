@@ -2,6 +2,7 @@
 
 #include "common.h"
 #include "audio/effect.h"
+#include "gui/spectrum_analyzer.h"
 #include <imgui.h>
 
 namespace Amplitron {
@@ -88,6 +89,9 @@ private:
 
     ImVec4 pedal_color_;  ///< Pedal body color derived from effect type.
     ImVec4 led_color_;    ///< LED / accent color derived from effect type.
+
+    spectrumAnalyser spectrum_analyzer_;
+    bool show_analyzer_ = false;
 
     /** @brief Look up pedal_color_ and led_color_ from the theme table. */
     void assign_colors();
